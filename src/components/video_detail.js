@@ -1,20 +1,24 @@
-class VideoDetails {
-  constructor(props) {
-    super(props);
+import React from 'react';
 
-    this.state = {
-      term: ""
-    };
-  }
+const VideoDetail = ({ video }) => {
+  if (!video) {
+    return <div>Loading...</div>;
+  };
+  const videoId = video.id.videoId;
 
-  render() {
-    return (
-      <div>
-        <input
-          value={this.state.term}
-          onChange={event => this.setState({ term: this.target.value })}
-        />
+  const url = `https://www.youtube.com/embed/${videoId}`;
+
+  return (
+    <div className="video-detail col-md-8">
+      <div className="embed-responsive embed-responsive-16by9">
+        <iframe className="enmbed-responsive" src={url}></iframe>
       </div>
-    );
-  }
-}
+      <div className="details">
+        <div>{video.snippet.title}</div>
+        <div>{video.snippet.description}</div>
+      </div>
+    </div>
+  );
+};
+
+export default VideoDetail;
